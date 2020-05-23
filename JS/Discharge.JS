@@ -1,6 +1,7 @@
 
 function ShowDischarge() {
 
+
  function convertToJSON(csvurl)
  {
  
@@ -33,8 +34,46 @@ if (cells.length > 1) {
 return customers;
 }
 
- var locations=[];
 
+ function convertToJSONForLocation(csvurl)
+ {
+ 
+var url = csvurl;
+
+var request = new XMLHttpRequest();  
+request.open("GET", url, false);   
+request.send(null);  
+
+var csvData = new Array();
+var customers = new Array();
+ var rows = request.responseText.split(/\r?\n|\r/);
+ for (var i = 0; i < rows.length; i++) {
+ var cells = rows[i].split(",");
+if (cells.length > 1) {
+	 var customer = {};
+	customer.Loc = cells[0];
+	customer.Lat = cells[1];
+	customer.Lon = cells[2];
+	customer.Positive = cells[3];
+	customer.Recovered = cells[4];
+	customer.Death = cells[5];
+	customer.Discharged = cells[6];
+	customer.Male = cells[7];
+	customer.Female = cells[8];
+	customer.Info_Positive = cells[9];
+	customer.Info_Recovered = cells[10];
+	customer.Info_Death = cells[11];
+	customer.Info_Discharged = cells[12];
+	customer.ImageUrl = cells[12];
+	customers.push(customer);
+   }
+}
+							
+return customers;
+}
+
+ var locations=[];
+function PatientWise() {
  
  if(document.getElementById("Positive").checked )
  {
@@ -194,13 +233,12 @@ if(locations== '')
 	  locations = Positive;
 	  
 	  document.getElementById("Positive").checked =true;
-	
-			
+ 	 document.getElementById("rdoPatient").checked =true;
 			
  }
- 
-  
-  var map = new google.maps.Map(document.getElementById('map'), {
+	
+	
+	 var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
     center: new google.maps.LatLng(26.9202933, 75.8273711),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -216,6 +254,9 @@ var src = 'https://drive.google.com/open?id=1kkJABS8GOaFofaQeH0igaI72AP4oHe0i';
   var infowindow = new google.maps.InfoWindow({})
 
   var marker, i
+
+  
+
 
   for (i = 0; i < locations.length; i++) {
     marker = new google.maps.Marker({
@@ -240,6 +281,199 @@ var src = 'https://drive.google.com/open?id=1kkJABS8GOaFofaQeH0igaI72AP4oHe0i';
     )
 	
   }
+	
+ 
+}
+
+function Locationwise() {
+	
+	if(document.getElementById("Positive_L").checked )
+ {
+	  var Positive = convertToJSONForLocation('layerdata/AllData.csv');
+ 			
+			for (i = 0; i < Positive.length; i++) {
+			Positive[i].ImageUrl ='positive.png';
+			Positive[i].Info_Positive ='Positive - ' + Positive[i].Positive ;
+			}
+	  
+	  locations = Positive;
+	 	
+ }
+  if(document.getElementById("Recoverd_L").checked )
+ {
+	 var Recoverd = convertToJSONForLocation('layerdata/AllData.csv');
+	
+	 var tempRecoverd = Recoverd.filter( x => 
+			x.Recovered > 0);
+			
+			for (i = 0; i < tempRecoverd.length; i++) {
+			tempRecoverd[i].ImageUrl ='recovered.png';
+			tempRecoverd[i].Info_Positive ='Recovered - ' + tempRecoverd[i].Recovered ;
+			}
+		
+	 locations = locations.concat(tempRecoverd);
+ }
+  if(document.getElementById("Discharged_L").checked )
+ {
+	  var Discharged = convertToJSONForLocation('layerdata/AllData.csv');
+	  var tempDischarged = Discharged.filter( x => 
+			x.Discharged > 0);
+			
+			for (i = 0; i < tempDischarged.length; i++) {
+			tempDischarged[i].ImageUrl ='Discharge.jpg';
+			tempDischarged[i].Info_Positive ='Discharged - ' + tempDischarged[i].Discharged ;
+			}
+	   locations = locations.concat(tempDischarged);
+ }
+  if(document.getElementById("Death_L").checked )
+ {
+	 var Death = convertToJSONForLocation('layerdata/AllData.csv');
+	  var tempDeath = Death.filter( x => 
+			x.Death > 0);
+			
+			for (i = 0; i < tempDeath.length; i++) {
+			tempDeath[i].ImageUrl ='death.png';
+			tempDeath[i].Info_Positive ='Death - ' + tempDeath[i].Death ;
+			}
+	   locations = locations.concat(tempDeath);
+ }
+ if(document.getElementById("Male_L").checked )
+ {
+	 var Male = convertToJSONForLocation('layerdata/AllData.csv');
+	 
+	 var tempMale = Male.filter( x => 
+			x.Male > 0);
+			
+			for (i = 0; i < tempMale.length; i++) {
+			tempMale[i].ImageUrl ='bluedot.png';
+			tempMale[i].Info_Positive ='Male - ' + tempMale[i].Male ;
+			}
+	   locations = locations.concat(tempMale);
+	   
+	   
+	   
+ }
+ if(document.getElementById("Female_L").checked )
+ {
+	 var Female = convertToJSONForLocation('layerdata/AllData.csv');
+	 
+	 var tempFemale = Female.filter( x => 
+			x.Female > 0);
+			
+			for (i = 0; i < tempFemale.length; i++) {
+			tempFemale[i].ImageUrl ='Pinkdot.png';
+			tempFemale[i].Info_Positive ='Female - ' + tempFemale[i].Female ;
+			}
+	 
+	   locations = locations.concat(tempFemale);
+	  
+	  
+	   
+ }
+  if(document.getElementById("Curfew_L").checked )
+ {
+	 var Curfew = convertToJSONForLocation('layerdata/ThanawiseCurfew.csv');
+	 
+	 for (i = 0; i < Curfew.length; i++) {
+			Curfew[i].ImageUrl ='Rajasthan_Police_Logo.png';
+			}
+	 
+	   locations = locations.concat(Curfew);
+ }
+  // if(document.getElementById("Active").checked )
+ // {
+	 // var Active = convertToJSON('layerdata/Active.csv');
+	   // locations = locations.concat(Active);
+	  
+ // }
+ if(locations== '')
+ {
+	  var Positive = convertToJSONForLocation('layerdata/AllData.csv');
+			
+			
+			for (i = 0; i < Positive.length; i++) {
+			Positive[i].ImageUrl ='positive.png';
+				Positive[i].Info_Positive ='Positive - ' + Positive[i].Positive ;
+			}
+	  
+	  locations = Positive;
+
+	
+	  document.getElementById("Positive_L").checked =true;
+  }
+  	 var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: new google.maps.LatLng(26.9202933, 75.8273711),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+  })
+
+var src = 'https://drive.google.com/open?id=1kkJABS8GOaFofaQeH0igaI72AP4oHe0i';
+  var kmlLayer = new google.maps.KmlLayer(src, {
+          suppressInfoWindows: true,
+          preserveViewport: false,
+          map: map
+        });
+
+  var infowindow = new google.maps.InfoWindow({})
+
+  var marker, i
+
+  
+
+
+  for (i = 0; i < locations.length; i++) {
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locations[i].Lat, locations[i].Lon),
+      label: { color: '#00aaff', fontWeight: 'bold', fontSize: '12px', text: locations[i].Loc },
+	 
+	  map: map,
+	   icon: {
+     url: 'Images/' + locations[i].ImageUrl,
+     labelOrigin: { x: 12, y: -10}
+   },
+    })
+    google.maps.event.addListener(
+      marker,
+      'click',
+      (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i].Info_Positive)
+          infowindow.open(map, marker)
+        }
+      })(marker, i)
+    )
+	
+  }
+	
+	
+	return locations;
+}
+
+
+
+if(document.getElementById("rdoPatient").checked == true)
+{
+
+PatientWise();
+
+}
+
+else if(document.getElementById("rdoLoc").checked == true)
+{
+
+Locationwise();
+
+
+}
+else
+{
+	PatientWise();
+	
+}
+  
+	
+
+ 
  
 }
 
