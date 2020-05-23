@@ -32,6 +32,7 @@ legend {
 }   </style>
 	
 	<script type="text/javascript" src="JS\Discharge.JS"> </script>
+	    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	
  <script type="text/javascript" src="JS\geoxml3.js"></script>
  
@@ -49,9 +50,11 @@ legend {
   function radioLocation() {
    
    document.getElementById("divPatient").style.display = "none";
-	 document.getElementById("divlocation").style.display = "block";
-	 document.getElementById("rdoLoc").checked =true;
+   document.getElementById("divlocation").style.display = "block";
+	document.getElementById("rdoLoc").checked =true;
 	  document.getElementById("rdoPatient").checked =false;
+	    document.getElementById("Positive_L").checked =false;
+		ShowDischarge();
    
    }
   
@@ -134,45 +137,17 @@ legend {
 	
   }
   
-  var rdoPatient = document.getElementById("rdoPatient");
- 
-
-  // If the checkbox is checked, display the output textrdoLoc
-  if (rdoPatient.checked == true){
-
-    document.getElementById("divPatient").style.display = "block";
-	 document.getElementById("divlocation").style.display = "none";
-	 document.getElementById("rdoLoc").checked =false;
-	  document.getElementById("rdoPatient").checked =true;
-  }
-  else
-  {
-   document.getElementById("divPatient").style.display = "none";
-	 document.getElementById("divlocation").style.display = "block";
-	 document.getElementById("rdoLoc").checked =true;
-	  document.getElementById("rdoPatient").checked =false;
-  }
- 
-  
-  if (rdoLoc.checked == true){
-
- document.getElementById("divPatient").style.display = "none";
-	 document.getElementById("divlocation").style.display = "block";
-	 document.getElementById("rdoLoc").checked =true;
-	  document.getElementById("rdoPatient").checked =false;
- 
-   
-  }
   
   
   }
+  
   
     </script>
   </head>
   <body>
   	
     
-	<table style="width: 100%; cellpadding : 0px ; cellspacing : 0px;  ">
+	<table style="width: 100%; cellpadding : 0; cellspacing : 0;   ">
 	<tr style="background-color : blue ;  cellpadding : 0px ; cellspacing : 0px; "> 
 	<td  style="width: 15% ;  cellpadding : 0px ; cellspacing : 0px;  "> 
 	
@@ -186,17 +161,17 @@ legend {
 	<tr> 
 	<td style="float:left">  <fieldset>
   <legend>Covid- 19 Info</legend>
-	<!-- <div> -->
-     <!-- <input type="radio" id="rdoPatient"  checked="checked"  onclick="radioPatient()"> -->
-      <!-- <label style="font-size : 15px" for="rdoPatient">Patient </label> -->
-	   <!-- <input type="radio" id="rdoLoc"  onclick="radioLocation()"> -->
-      <!-- <label style="font-size : 15px" for="rdoType" >Location </label> -->
-    <!-- </div>    -->
+	<div> 
+      <input type="radio" id="rdoPatient" onclick="radioPatient()"> 
+      <label style="font-size : 15px" for="rdoPatient">Patient </label> 
+	  <input type="radio" id="rdoLoc"  onclick="radioLocation()"> 
+      <label style="font-size : 15px" for="rdoLoc" >Location </label>
+     </div>   
    
    <div id=divPatient>
    
    <div>
-      <input type="checkbox" id="Positive" >
+      <input type="checkbox" id="Positive" onChange="ShowDischarge();" >
       <label for="Positive">Positive</label>
     </div>
     <!-- <div> -->
@@ -204,56 +179,56 @@ legend {
       <!-- <label for="Recoverd">Recoverd</label> -->
     <!-- </div> -->
     <div>
-      <input type="checkbox" id="Discharged" >
+      <input type="checkbox" id="Discharged" onChange="ShowDischarge();">
       <label for="Discharged">Discharged</label>
     </div>
     <div>
-      <input type="checkbox" id="Death" >
+      <input type="checkbox" id="Death" onChange="ShowDischarge();">
       <label for="Death">Death</label>
     </div>
 	<div>
-      <input type="checkbox" id="Active" >
+      <input type="checkbox" id="Active" onChange="ShowDischarge();">
       <label for="Active">Active</label>
     </div>
    <div>
-      <input type="checkbox" id="Male" >
+      <input type="checkbox" id="Male" onChange="ShowDischarge();">
       <label for="Male">Male</label>
 	  <div style="margin-left : 15px">
 	  
-      <input type="checkbox" id="AgeGrp1"  onclick="Selectchklist()">
+      <input type="checkbox" id="AgeGrp1"  onclick="Selectchklist()" onChange="ShowDischarge();">
       <label for="AgeGrp1">1 to 20</label>
 	  </div >
 	  <div style="margin-left : 15px">
-      <input type="checkbox" id="AgeGrp2"  onclick="Selectchklist()">
+      <input type="checkbox" id="AgeGrp2"  onclick="Selectchklist()" onChange="ShowDischarge();">
       <label for="AgeGrp1">21 to 40</label>
 	  </div >
 	  <div style="margin-left : 15px">
-      <input type="checkbox" id="AgeGrp3"  onclick="Selectchklist()">
+      <input type="checkbox" id="AgeGrp3"  onclick="Selectchklist()" onChange="ShowDischarge();">
       <label for="AgeGrp1">40 to 60</label>
     </div>
 	 <div style="margin-left : 15px">
-      <input type="checkbox" id="AgeGrp4"  onclick="Selectchklist()">
+      <input type="checkbox" id="AgeGrp4"  onclick="Selectchklist()" onChange="ShowDischarge();">
       <label for="AgeGrp1">Greater than 60</label>
     </div>
    </div>
    <div>
-      <input type="checkbox" id="Female" >
+      <input type="checkbox" id="Female"  onChange="ShowDischarge();">
       <label for="Female">Female</label>
 	 <div style="margin-left : 15px">
 	  
-      <input type="checkbox" id="AgeGrp1F" onclick="Selectchklist()" >
+      <input type="checkbox" id="AgeGrp1F" onclick="Selectchklist()" onChange="ShowDischarge();">
       <label for="AgeGrp1F">1 to 20</label>
 	  </div >
 	  <div style="margin-left : 15px">
-      <input type="checkbox" id="AgeGrp2F" onclick="Selectchklist()" >
+      <input type="checkbox" id="AgeGrp2F" onclick="Selectchklist()" onChange="ShowDischarge();">
       <label for="AgeGrp2F">21 to 40</label>
 	  </div >
 	  <div style="margin-left : 15px">
-      <input type="checkbox" id="AgeGrp3_F" onclick="Selectchklist()" >
+      <input type="checkbox" id="AgeGrp3_F" onclick="Selectchklist()" onChange="ShowDischarge();">
       <label for="AgeGrp3_F">40 to 60</label>
     </div>
 	 <div style="margin-left : 15px">
-      <input type="checkbox" id="AgeGrp4_F"  onclick="Selectchklist()">
+      <input type="checkbox" id="AgeGrp4_F"  onclick="Selectchklist()" onChange="ShowDischarge();">
       <label for="AgeGrp4_F">Greater than 60</label>
     </div>
     </div>
@@ -264,56 +239,64 @@ legend {
     <!-- </div> -->
     <div>
 	
-      <button type="submit" onclick=ShowDischarge();>Submit </button>
+      <button type="submit" id ="Patient" onclick=ShowDischarge();>Submit </button>
     </div>
 	</div>
 	
 	 <div id=divlocation style="display : none;">
    
    <div>
-      <input type="checkbox" id="Positive_L" >
+      <input type="checkbox" id="Positive_L"  onChange="ShowDischarge();">
       <label for="Positive_L">Positive</label>
     </div>
     <div>
-      <input type="checkbox" id="Recoverd_L" >
-      <label for="Recoverd_L">Recoverd</label>
+      <input type="checkbox" id="Recoverd_L" onChange="ShowDischarge();">
+      <label for="Recoverd_L">Recovered</label>
     </div>
     <div>
-      <input type="checkbox" id="Discharged_L" >
+      <input type="checkbox" id="Discharged_L" onChange="ShowDischarge();" >
       <label for="Discharged_L">Discharged</label>
     </div>
     <div>
-      <input type="checkbox" id="Death_L" >
+      <input type="checkbox" id="Death_L" onChange="ShowDischarge();">
       <label for="Death_L">Death</label>
     </div>
-	<div>
-      <input type="checkbox" id="Active_L" >
-      <label for="Active_L">Active</label>
-    </div>
+	<!-- <div> -->
+      <!-- <input type="checkbox" id="Active_L" > -->
+      <!-- <label for="Active_L">Active</label> -->
+    <!-- </div> -->
    <div>
-      <input type="checkbox" id="Male_L" >
+      <input type="checkbox" id="Male_L" onChange="ShowDischarge();">
       <label for="Male_L">Male</label>
       
    </div>
    <div>
-      <input type="checkbox" id="Female_L" >
+      <input type="checkbox" id="Female_L" onChange="ShowDischarge();" >
       <label for="Female_L">Female</label>
 	 
     </div>
 	<div>
-      <input type="checkbox" id="Curfew_L" >
+      <input type="checkbox" id="Curfew_L" onChange="ShowDischarge();">
       <label for="Curfew_L">Curfew Area</label>
 	  
     </div>
     <div>
 	
-      <button type="submit" onclick=ShowLocationwiseData();>Submit </button>
+      <button id="location" type="submit"  onclick=ShowDischarge(this.id);>Submit </button>
     </div>
 	</div>
   </fieldset></td>
 	<td style="width: 85% ; "><div id="map" ></div> </td>
 	</tr>
+	<tr style="background-color : blue ;  cellpadding : 0px ; cellspacing : 0px; "> 
+	<td  style="width: 15% ;  cellpadding : 0px ; cellspacing : 0px;  "> 
+	&nbsp;
 	
+	</td>
+	<td style="width: 85% ; height : 20px; color: white ; text-align : center"> 
+	&nbsp;
+	</td>
+	</tr>
 	</table>
 	
 	 <!-- <button id="box" onclick="initMap()"  type="button">new</button>  -->
