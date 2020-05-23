@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 600px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+html {
+  font-family: sans-serif;
+}
+
+form {
+  width: 600px;
+  margin: 0 auto;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+fieldset {
+  background: cyan;
+  border: 5px solid blue;
+}
+
+legend {
+  padding: 10px;
+  background: blue;
+  color: cyan;
+}   </style>
+	
+	<script type="text/javascript" src="JS\map.JS"> </script>
+	
+ <script type="text/javascript" src="JS\geoxml3.js"></script>
+ 
+  <script>
+   function radioPatient() {
+   
+   document.getElementById("divPatient").style.display = "block";
+	 document.getElementById("divlocation").style.display = "none";
+	 document.getElementById("rdoLoc").checked =false;
+	  document.getElementById("rdoPatient").checked =true;
+   
+   }
+   
+   
+  function radioLocation() {
+   
+   document.getElementById("divPatient").style.display = "none";
+	 document.getElementById("divlocation").style.display = "block";
+	 document.getElementById("rdoLoc").checked =true;
+	  document.getElementById("rdoPatient").checked =false;
+   
+   }
+  
+  function Selectchklist() {
+ // Get the checkbox
+  
+  
+  var AgeGrp1F = document.getElementById("AgeGrp1F");
+ 
+
+  // If the checkbox is checked, display the output text
+  if (AgeGrp1F.checked == true){
+    document.getElementById("Female").checked =true;
+	
+  } 
+  
+  var AgeGrp2F = document.getElementById("AgeGrp2F");
+ 
+
+  // If the checkbox is checked, display the output text
+  if (AgeGrp2F.checked == true){
+    document.getElementById("Female").checked =true;
+	
+  } 
+  
+   var AgeGrp3_F = document.getElementById("AgeGrp3_F");
+ 
+
+  // If the checkbox is checked, display the output text
+  if (AgeGrp3_F.checked == true){
+    document.getElementById("Female").checked =true;
+	
+  } 
+  
+  var AgeGrp4_F = document.getElementById("AgeGrp4_F");
+ 
+
+  // If the checkbox is checked, display the output text
+  if (AgeGrp4_F.checked == true){
+    document.getElementById("Female").checked =true;
+	
+  }
+  
+  // male
+  
+  
+  var AgeGrp1 = document.getElementById("AgeGrp1");
+ 
+
+  // If the checkbox is checked, display the output text
+  if (AgeGrp1.checked == true){
+    document.getElementById("Male").checked =true;
+	
+  } 
+  
+  var AgeGrp2 = document.getElementById("AgeGrp2");
+ 
+
+  // If the checkbox is checked, display the output text
+  if (AgeGrp2.checked == true){
+    document.getElementById("Male").checked =true;
+	
+  } 
+  
+   var AgeGrp3 = document.getElementById("AgeGrp3");
+ 
+
+  // If the checkbox is checked, display the output text
+  if (AgeGrp3.checked == true){
+    document.getElementById("Male").checked =true;
+	
+  } 
+  
+  var AgeGrp4 = document.getElementById("AgeGrp4");
+ 
+
+  // If the checkbox is checked, display the output text
+  if (AgeGrp4.checked == true){
+    document.getElementById("Male").checked =true;
+	
+  }
+  
+  var rdoPatient = document.getElementById("rdoPatient");
+ 
+
+  // If the checkbox is checked, display the output textrdoLoc
+  if (rdoPatient.checked == true){
+
+    document.getElementById("divPatient").style.display = "block";
+	 document.getElementById("divlocation").style.display = "none";
+	 document.getElementById("rdoLoc").checked =false;
+	  document.getElementById("rdoPatient").checked =true;
+  }
+  else
+  {
+   document.getElementById("divPatient").style.display = "none";
+	 document.getElementById("divlocation").style.display = "block";
+	 document.getElementById("rdoLoc").checked =true;
+	  document.getElementById("rdoPatient").checked =false;
+  }
+ 
+  
+  if (rdoLoc.checked == true){
+
+ document.getElementById("divPatient").style.display = "none";
+	 document.getElementById("divlocation").style.display = "block";
+	 document.getElementById("rdoLoc").checked =true;
+	  document.getElementById("rdoPatient").checked =false;
+ 
+   
+  }
+  
+  
+  }
+  
+    </script>
+  </head>
+  <body>
+  	
+    
+	<table style="width: 100%; cellpadding : 0px ; cellspacing : 0px;  ">
+	<tr style="background-color : blue ;  cellpadding : 0px ; cellspacing : 0px; "> 
+	<td  style="width: 15% ;  cellpadding : 0px ; cellspacing : 0px;  "> 
+	
+	<img src="Images/logo1.png" style =" width : 200px; "> </img>
+	</td>
+	<td style="width: 85% ; color: white ; text-align : center"> <h2>JAIPUR STATUS REPORT</h2>
+	</td>
+	</tr>
+	
+	
+	<tr> 
+	<td style="float:left">  <fieldset>
+  <legend>Covid- 19 Info</legend>
+	<!-- <div> -->
+     <!-- <input type="radio" id="rdoPatient"  checked="checked"  onclick="radioPatient()"> -->
+      <!-- <label style="font-size : 15px" for="rdoPatient">Patient </label> -->
+	   <!-- <input type="radio" id="rdoLoc"  onclick="radioLocation()"> -->
+      <!-- <label style="font-size : 15px" for="rdoType" >Location </label> -->
+    <!-- </div>    -->
+   
+   <div id=divPatient>
+   
+   <div>
+      <input type="checkbox" id="Positive" >
+      <label for="Positive">Positive</label>
+    </div>
+    <!-- <div> -->
+      <!-- <input type="checkbox" id="Recoverd" > -->
+      <!-- <label for="Recoverd">Recoverd</label> -->
+    <!-- </div> -->
+    <div>
+      <input type="checkbox" id="Discharged" >
+      <label for="Discharged">Discharged</label>
+    </div>
+    <div>
+      <input type="checkbox" id="Death" >
+      <label for="Death">Death</label>
+    </div>
+	<div>
+      <input type="checkbox" id="Active" >
+      <label for="Active">Active</label>
+    </div>
+   <div>
+      <input type="checkbox" id="Male" >
+      <label for="Male">Male</label>
+	  <div style="margin-left : 15px">
+	  
+      <input type="checkbox" id="AgeGrp1"  onclick="Selectchklist()">
+      <label for="AgeGrp1">1 to 20</label>
+	  </div >
+	  <div style="margin-left : 15px">
+      <input type="checkbox" id="AgeGrp2"  onclick="Selectchklist()">
+      <label for="AgeGrp1">21 to 40</label>
+	  </div >
+	  <div style="margin-left : 15px">
+      <input type="checkbox" id="AgeGrp3"  onclick="Selectchklist()">
+      <label for="AgeGrp1">40 to 60</label>
+    </div>
+	 <div style="margin-left : 15px">
+      <input type="checkbox" id="AgeGrp4"  onclick="Selectchklist()">
+      <label for="AgeGrp1">Greater than 60</label>
+    </div>
+   </div>
+   <div>
+      <input type="checkbox" id="Female" >
+      <label for="Female">Female</label>
+	 <div style="margin-left : 15px">
+	  
+      <input type="checkbox" id="AgeGrp1F" onclick="Selectchklist()" >
+      <label for="AgeGrp1F">1 to 20</label>
+	  </div >
+	  <div style="margin-left : 15px">
+      <input type="checkbox" id="AgeGrp2F" onclick="Selectchklist()" >
+      <label for="AgeGrp2F">21 to 40</label>
+	  </div >
+	  <div style="margin-left : 15px">
+      <input type="checkbox" id="AgeGrp3_F" onclick="Selectchklist()" >
+      <label for="AgeGrp3_F">40 to 60</label>
+    </div>
+	 <div style="margin-left : 15px">
+      <input type="checkbox" id="AgeGrp4_F"  onclick="Selectchklist()">
+      <label for="AgeGrp4_F">Greater than 60</label>
+    </div>
+    </div>
+	<!-- <div> -->
+      <!-- <input type="checkbox" id="Curfew" > -->
+      <!-- <label for="Curfew">Curfew Area</label> -->
+	  
+    <!-- </div> -->
+    <div>
+	
+      <button type="submit" onclick=ShowDischarge();>Submit </button>
+    </div>
+	</div>
+	
+	 <div id=divlocation style="display : none;">
+   
+   <div>
+      <input type="checkbox" id="Positive_L" >
+      <label for="Positive_L">Positive</label>
+    </div>
+    <div>
+      <input type="checkbox" id="Recoverd_L" >
+      <label for="Recoverd_L">Recoverd</label>
+    </div>
+    <div>
+      <input type="checkbox" id="Discharged_L" >
+      <label for="Discharged_L">Discharged</label>
+    </div>
+    <div>
+      <input type="checkbox" id="Death_L" >
+      <label for="Death_L">Death</label>
+    </div>
+	<div>
+      <input type="checkbox" id="Active_L" >
+      <label for="Active_L">Active</label>
+    </div>
+   <div>
+      <input type="checkbox" id="Male_L" >
+      <label for="Male_L">Male</label>
+      
+   </div>
+   <div>
+      <input type="checkbox" id="Female_L" >
+      <label for="Female_L">Female</label>
+	 
+    </div>
+	<div>
+      <input type="checkbox" id="Curfew_L" >
+      <label for="Curfew_L">Curfew Area</label>
+	  
+    </div>
+    <div>
+	
+      <button type="submit" onclick=ShowLocationwiseData();>Submit </button>
+    </div>
+	</div>
+  </fieldset></td>
+	<td style="width: 85% ; "><div id="map" ></div> </td>
+	</tr>
+	
+	</table>
+	
+	 <!-- <button id="box" onclick="initMap()"  type="button">new</button>  -->
+	  <!-- <button id="yes" onclick="ShowDischarge()"  type="button">Discharge</button>  -->
+	   <!-- <button id="Poly" onclick="getFile('dataforgooglemap.csv')"  type="button">Polygon</button>  -->
+	  
+    <!--The div element for the map -->
+    
+    <script>
+// Initialize and add the map
+<!-- function initMap() { -->
+  <!-- // The location of jaipur -->
+  <!-- var jaipur= {lat: 26.9202933, lng: 75.8273711}; -->
+  <!-- // The map, centered at jaipur -->
+  <!-- var map = new google.maps.Map( -->
+      <!-- document.getElementById('map'), {zoom: 15, center: jaipur}); -->
+  <!-- // The marker, positioned at jaipur -->
+  <!-- var marker = new google.maps.Marker({position: jaipur, map: map}); -->
+<!-- } -->
+
+
+function initMap() {
+  var broadway = {
+    info:
+      '<strong>Chipotle on Broadway</strong><br>\
+    	5224 N Broadway St<br> Chicago, IL 60640<br>\
+    	',
+    lat: 26.8863587,
+    long: 75.730604,
+	label: 'T4',
+	  
+  }
+
+  var belmont = {
+    info:
+      '<strong>Chipotle on Belmont</strong><br>\
+    	1025 W Belmont Ave<br> Chicago, IL 60657<br>\
+    	',
+    lat: 26.8945295,
+    long: 75.8263396,
+	label: 'T1',
+  }
+
+  var sheridan = {
+    info:
+      '<strong>Chipotle on Sheridan</strong><br>\r\
+    	6600 N Sheridan Rd<br> Chicago, IL 60626<br>\
+    	',
+    lat: 26.9554692,
+    long: 75.7685047,
+	label: 'T2',
+  }
+
+var banipark = {
+    info:
+      '<strong>Banipark</strong><br>\r\
+    	6600 N Sheridan Rd<br> Chicago, IL 60626<br>\
+    	',
+    lat: 26.9296713,
+    long: 75.7819812,
+	label: 'T3',
+  }
+
+  var locations = [
+    [broadway.info, broadway.lat, broadway.long,broadway.label, 0],
+    [belmont.info, belmont.lat, belmont.long,belmont.label, 1],
+    [sheridan.info, sheridan.lat, sheridan.long,sheridan.label, 2],
+	[banipark.info,banipark.lat,banipark.long,banipark.label,3],
+  ]
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: new google.maps.LatLng(26.9202933, 75.8273711),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+  })
+
+  var infowindow = new google.maps.InfoWindow({})
+
+  var marker, i
+
+  for (i = 0; i < locations.length; i++) {
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+	   label: { color: '#00aaff', fontWeight: 'bold', fontSize: '14px', text: locations[i][3] },
+		<!-- label: (locations[i][3]), -->
+		title: (locations[i][3]),
+	 map: map,
+	 icon: {
+     url: 'Images/Rajasthan_Police_Logo.png',
+     labelOrigin: { x: 12, y: -10}
+   },
+	  <!-- icon: 'D:/Abhinav/Rajasthan_Police_Logo.png', -->
+	  
+    })
+
+    google.maps.event.addListener(
+      marker,
+      'click',
+      (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0])
+          infowindow.open(map, marker)
+        }
+      })(marker, i)
+    )
+	
+	
+	 // Define the LatLng coordinates for the polygon's path.
+        var triangleCoords = [
+          {lat: 26.9554692, lng: 75.7685047},
+          {lat: 26.8863587, lng: 75.730604},
+          {lat: 26.8945295, lng: 75.8263396},
+		  {lat: 26.9296713, lng: 75.7819812},
+          {lat: 26.9554692, lng: 75.7685047}
+        ];
+
+        // Construct the polygon.
+        var bermudaTriangle = new google.maps.Polygon({
+          paths: triangleCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.15
+        });
+		bermudaTriangle.setMap(map);
+  }
+}
+
+
+ function initMapPoly() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 5,
+          center: {lat: 24.886, lng: -70.268},
+          mapTypeId: 'terrain'
+        });
+
+        // Define the LatLng coordinates for the polygon's path.
+        var triangleCoords = [
+          {lat: 25.774, lng: -80.190},
+          {lat: 18.466, lng: -66.118},
+          {lat: 32.321, lng: -64.757},
+          {lat: 25.774, lng: -80.190}
+        ];
+
+        // Construct the polygon.
+        var bermudaTriangle = new google.maps.Polygon({
+          paths: triangleCoords,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35
+        });
+        bermudaTriangle.setMap(map);
+      }
+
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+	
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTnjswt5KjvekN7K72FFmnFx95tfKwGZg&callback=ShowDischarge">
+    </script>
+  </body>
+</html>

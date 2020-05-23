@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        body
+        {
+            font-family: 'Courier New';
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function  () {
+            $("#upload").bind("click", function () {
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+                if (regex.test($("#fileUpload").val().toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var customers = new Array();
+                            var rows = e.target.result.split("\r\n");
+                            for (var i = 0; i < rows.length; i++) {
+                                var cells = rows[i].split(",");
+                                if (cells.length > 1) {
+                                    var customer = {};
+                                    customer.Loc = cells[0];
+                                    customer.Lat = cells[1];
+                                    customer.Lon = cells[2];
+									 customer.Cnt = cells[3];
+                                    customers.push(customer);
+                                }
+                            }
+                            $("#dvCSV").html('');
+                            $("#dvCSV").append(JSON.stringify(customers));
+							
+							
+                        }
+                        reader.readAsText($("#fileUpload")[0].files[0]);
+                    } else {
+                        alert("This browser does not support HTML5.");
+                    }
+                } else {
+                    alert("Please upload a valid CSV file.");
+                }
+            });
+        });
+		
+	
+    </script>
+	
+	
+	
+    <input type="file" id="fileUpload" />
+    <input type="button" id="upload" value="Upload" />
+	<button id="download">Download</button>
+	<script type="text/javascript">
+	
+			<!-- var data = '{"tasks":[{"blockId":"startpoint4","tasktype":"startpoint","properties":[],"positionX":430,"positionY":230},{"blockId":"userTask5","tasktype":"userTask","properties":[],"positionX":630,"positionY":230}],"connections":[],"properties":[],"numberOfElements":5}'; -->
+
+
+document.querySelector('#download')
+.addEventListener('click', function() {
+var temp = document.getElementById("dvCSV").innerText;
+var temp1 = "data =  " + temp + "  ;" ;
+
+  var blob = new Blob( [temp1] , {
+      type: 'application/octet-stream'
+  });
+  var url = URL.createObjectURL( blob );
+  var link = document.createElement( 'a' );
+  link.setAttribute( 'href', url );
+  link.setAttribute( 'download', 'data.json' );
+  link.click()
+  URL.revokeObjectURL(url)
+})
+	
+	
+	
+	</script>
+    <hr />
+    <div id="dvCSV">
+    </div>
+</body>
+</html>
